@@ -38,9 +38,12 @@ function JoinChatModal({
       if (location.pathname === '/') {
         navigate(`/${joinChatId}`);
       }
-    } catch (err) {
+    } catch (err: any) {
       setError('Failed to join chat room. Please try again.');
-      console.error(err);
+      if (err.message === 'Invalid session id.') {
+        window.alert('The chat id is not valid. Please try again.');
+        navigate('/');
+      }
     }
   };
 
